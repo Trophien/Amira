@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Amira Magyar AI</title>
+</head>
+<body>
+	<script src="https://code.responsivevoice.org/responsivevoice.js?key=PA9ECyt1"></script>
+
+	<button id='btnGiveCommand'>Give Command!</button>
+    <br><br>
+    <span id='message'></span>
+    <br><br>
+	<script>
+		var message = document.querySelector('#message');
+
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+
+        var grammar = '#JSGF V1.0;'
+
+        var recognition = new SpeechRecognition();
+        var speechRecognitionList = new SpeechGrammarList();
+        speechRecognitionList.addFromString(grammar, 1);
+        recognition.grammars = speechRecognitionList;
+        recognition.lang = 'hu-HU';
+        recognition.interimResults = false;
+
+        
+
+        recognition.onresult = function(event) {
+            var last = event.results.length - 1;
+            var command = event.results[last][0].transcript;
+            message.textContent = 'Voice Input: ' + command + '.';
+            if(command = "szia") {
+            	answer = "Üdvözletem! Élek.."
+            	Say();
+            }
+        };
+
+        recognition.onspeechend = function() {
+            recognition.stop();
+            var answer = "Ne szólj be te faszparaszt";
+            setTimeout(responsiveVoice.speak(answer, voice),15000);
+            recognition.start();
+        };
+
+        recognition.onerror = function(event) {
+            message.textContent = 'Error occurred in recognition: ' + event.error;
+        }        
+
+        document.querySelector('#btnGiveCommand').addEventListener('click', function(){
+            recognition.start();
+        });
+	</script>
+	
+	<script>
+		var say = 'A jelenlegi tudásomat meghaladja ez a mondat!';
+		var voice = 'Hungarian Female';
+		setTimeout(responsiveVoice.speak(say, voice),15000);
+	</script>
+
+
+	<script>
+	var answer {
+		answerMethod : function() {
+    		setTimeout(responsiveVoice.speak(answer, voice),15000);
+  		}
+  	};
+
+	</script>
+</body>
+</html>
